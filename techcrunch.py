@@ -33,7 +33,7 @@ def getStories():
             if(keyword_match != ""):
                 header += "Keyword Match: " + keyword_match
 
-            string = "\n\nTitle: " + title + "\nDate: " + date + "\nArticle Text: " + article_text
+            string = "\n\nTitle: " + title + "\nDate: " + date + "\nLink: " + link + "\nArticle Text: " + article_text
             save_file = open("stories.txt", 'a+')
             save_file.write(string.encode('utf-8'))
             save_file.close()

@@ -32,7 +32,7 @@ def getStories():
 
         
         if (interest_lvl > 1): #more than 2 interesting aspects of an article
-            string = "\n\nTitle: " + title + "\nDate: " + date + "\nKeyword: " + vc + "\nArticle Text: " + article_text
+            string = "\n\nTitle: " + title + "\nDate: " + date + "\nLink: " + link + "\nArticle Text: " + article_text
             save_file = open("stories.txt", 'a+')
             save_file.write(string)
             save_file.close()
