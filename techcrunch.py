@@ -14,7 +14,7 @@ def getStories():
     channel = root.find('channel')
 
     for item in channel.iter('item'):
-        
+
         # get title, date, and link url from xml feed
         title = item.find('title').text
         date = item.find('pubDate').text
@@ -22,8 +22,8 @@ def getStories():
         article_text = item.find('description').text
 
         # check for interesting geographies
-        interest_lvl = checkInterestLvl(article_text)
-        
+        interest_lvl = helper_functions.checkInterestLvl(article_text)
+
         if (interest_lvl > 1): #more than 2 interesting aspects of an article
             header = ""
             if(geo_match != ""):
