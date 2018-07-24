@@ -28,12 +28,11 @@ def getStories():
         article_text = half_one.split('</div>')[0]
 
         # check interest
-        interest_lvl = checkInterestLvl(article_text)
+        interest_lvl = helper_functions.checkInterestLvl(article_text)
 
-        
+
         if (interest_lvl > 1): #more than 2 interesting aspects of an article
             string = "\n\nTitle: " + title + "\nDate: " + date + "\nKeyword: " + vc + "\nArticle Text: " + article_text
             save_file = open("stories.txt", 'a+')
             save_file.write(string)
             save_file.close()
-

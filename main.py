@@ -5,10 +5,9 @@ except ImportError:
 import xml.etree.ElementTree as et
 import requests
 import helper_functions
-
-vc_list = ""
-geo_list = ""
-keyword_list = ""
+import techcrunch as tc
+import vcnewsdaily as vcnews
 
 if __name__ == '__main__':
-    
+    tc.getStories()
+    vcnews.getStories()
