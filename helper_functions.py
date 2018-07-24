@@ -15,17 +15,14 @@ def checkInterestLvl(article_text):
 
     for geo in geo_list:
         if geo.lower() in article_text.lower():
-            geo_match += (geo + ", ")
             interest_lvl += 1
 
     for vc in vc_list:
         if vc.lower() in article_text.lower():
-            vc_match += (vc + ", ")
             interest_lvl += 1
 
     for keyword in keyword_list:
         if keyword.lower() in article_text.lower():
-            keyword_match += (keyword + ", ")
             interest_lvl += 1
 
     return interest_lvl

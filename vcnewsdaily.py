@@ -4,7 +4,7 @@ except ImportError:
     from urllib2 import urlopen
 import xml.etree.ElementTree as et
 import requests
-import helper_functions
+import helper_functions as helper
 
 
 def getStories():
@@ -28,7 +28,7 @@ def getStories():
         article_text = half_one.split('</div>')[0]
 
         # check interest
-        interest_lvl = helper_functions.checkInterestLvl(article_text)
+        interest_lvl = helper.checkInterestLvl(article_text)
 
 
         if (interest_lvl > 1): #more than 2 interesting aspects of an article
