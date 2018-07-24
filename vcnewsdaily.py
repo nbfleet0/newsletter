@@ -7,8 +7,8 @@ import requests
 import helper_functions
 
 
-def getNews():
-    # get titles of recent articles from vcnewsdaily
+def getStories():
+
     contents = urlopen("https://feeds.feedburner.com/vcnewsdaily?fmt=xml").read()
     root = et.fromstring(contents)
     channel = root.find('channel')
