@@ -4,7 +4,7 @@ except ImportError:
     from urllib2 import urlopen
 import xml.etree.ElementTree as et
 import requests
-import functions
+import helper_functions
 
 # get titles of recent articles from vcnewsdaily
 contents = urlopen("https://feeds.feedburner.com/TechCrunch/fundings-exits").read()
@@ -13,9 +13,6 @@ channel = root.find('channel')
 
 
 for item in channel.iter('item'):
-    geo_match = ""
-    vc_match = ""
-    keyword_match = ""
 
     # get title, date, and link url from xml feed
     title = item.find('title').text
@@ -35,7 +32,7 @@ for item in channel.iter('item'):
         if(keyword_match != ""):
             header += "Keyword Match: " + keyword_match
 
-        string = "\n\n" + header + "\nTitle: " + title + "\nDate: " + date + "\nArticle Text: " + article_text
+        string = "\n\nTitle: " + title + "\nDate: " + date + "\nArticle Text: " + article_text
         save_file = open("stories.txt", 'a+')
         save_file.write(string.encode('utf-8'))
         save_file.close()

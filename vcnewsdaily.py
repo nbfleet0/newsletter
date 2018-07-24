@@ -4,7 +4,7 @@ except ImportError:
     from urllib2 import urlopen
 import xml.etree.ElementTree as et
 import requests
-import functions
+import helper_functions
 
 
 def getNews():
@@ -15,9 +15,6 @@ def getNews():
 
 
     for item in channel.iter('item'):
-        geo_match = ""
-        vc_match = ""
-        keyword_match = ""
 
         # get title, date, and link url from xml feed
         title = item.find('title').text
@@ -35,15 +32,7 @@ def getNews():
 
         
         if (interest_lvl > 1): #more than 2 interesting aspects of an article
-            header = ""
-            if(geo_match):
-                header += "Geography Match: " + geo_match[:-1]
-            if(vc_match):
-                header += "VC Match: " + vc_match[:-1]
-            if(keyword_match):
-                header += "Keyword Match: " + keyword_match[:-1]
-
-            string = "\n\n" + header + "\nTitle: " + title + "\nDate: " + date + "\nKeyword: " + vc + "\nArticle Text: " + article_text
+            string = "\n\nTitle: " + title + "\nDate: " + date + "\nKeyword: " + vc + "\nArticle Text: " + article_text
             save_file = open("stories.txt", 'a+')
             save_file.write(string)
             save_file.close()

@@ -1,4 +1,6 @@
-def generateLists(): #called once in main
+def checkInterestLvl(article_text):
+    interest_lvl = 0
+
     text_file = open("vclist.txt", "r")
     vc_list = text_file.read().split(',')
     text_file.close()
@@ -10,10 +12,6 @@ def generateLists(): #called once in main
     text_file = open("keywords.txt", "r")
     keyword_list = text_file.read().split(',')
     text_file.close()
-
-
-def checkInterestLvl(article_text):
-    interest_lvl = 0
 
     for geo in geo_list:
         if geo.lower() in article_text.lower():
