@@ -20,7 +20,20 @@ def getStories():
 
         if (interest_lvl > 1): #more than 2 interesting aspects of an article
 
-            string = "\n\nDate: " + date + "\nLink: " + link + "\nArticle Text: " + article_text
-            save_file = open("stories.txt", 'a+')
-            save_file.write(string.encode('utf-8'))
-            save_file.close()
+            # check for duplicates
+            duplicate = False
+            search_file = open("stories.txt", 'r')
+            lines = search_file.readlines()
+            search_file.close()
+
+            article_query = article_text.split('\n', 1)[0].encode('utf-8')
+
+            for i, line in enumerate(lines):
+                if article_query in line:
+                    duplicate = true
+
+            if(duplicate == False):
+                string = "\n\nDate: " + date + "\nLink: " + link + "\nArticle Text: " + article_text
+                save_file = open("stories.txt", 'a+')
+                save_file.write(string.encode('utf-8'))
+                save_file.close()

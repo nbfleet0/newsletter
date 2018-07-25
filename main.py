@@ -1,7 +1,5 @@
-import techcrunch
-import vcnewsdaily
-import pehub
-import fortune
+import daily
+import weekly
 
 
 if __name__ == '__main__':

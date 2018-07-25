@@ -24,8 +24,11 @@ def getStories():
         # get article text from link
         article = requests.get(link, verify=False)
         html = article.content
-        half_one = html.split('<div id="fullArticle" class="fullArticle">')[2]
-        article_text = half_one.split('</div>')[0]
+        half_one = html.split('<div id="fullArticle" class="fullArticle">')
+        article_text = ""
+        if(len(half_one) > 1):
+            half_two = half_one[2]
+            article_text = half_two.split('</div>')[0]
 
         # check interest
         interest_lvl = helper.checkInterestLvl(article_text)
@@ -36,3 +39,4 @@ def getStories():
             save_file = open("stories.txt", 'a+')
             save_file.write(string)
             save_file.close()
+

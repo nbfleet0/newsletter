@@ -1,1 +1,1 @@
-stem,fintech,insurtech,insurance,cryptocurrency,blockchain,payment,lending,financial service, bank,
+fintech,insurtech,insurance,cryptocurrency,blockchain,payment,lending,financial service, bank,

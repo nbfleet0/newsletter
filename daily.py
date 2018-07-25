@@ -1,0 +1,3 @@
+import fortune
+
+fortune.getStories()
