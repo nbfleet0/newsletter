@@ -2,6 +2,7 @@
 Weekly newsletter with new venture capital deals
 </br>
 </br>
+<h2>/newsletter</h2>
 <h3>Sources:</h3>
 -fortune.py: "http://fortune.com/newsletter/termsheet/?scrape=1" (new stories every day, not nessesarily unique)</br>
 -techcrunch.py: "https://feeds.feedburner.com/TechCrunch/fundings-exits" (new unique stories every week)</br>
@@ -21,3 +22,7 @@ Weekly newsletter with new venture capital deals
 -keywords.txt: stores keywords we're interested in</br>
 -vclist.txt: stores vc's we're interested in</br>
 -geographies.txt: stores locations we're interested in
+</br></br>
+<h2>/scoring</h2>
+-score.py: contains methods to get information from an angellist url, as well as number of twitter followers, search results, and twitter likes a company has</br>
+-seed-db.py: gets lists of companies from seed-db's database of incubator batches including angellist url's, funding, and exit status
