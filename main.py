@@ -7,3 +7,4 @@ if __name__ == '__main__':
 	techcrunch.getStories()
 	vcnewsdaily.getStories()
 	pehub.getStories()
+ 
