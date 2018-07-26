@@ -48,7 +48,7 @@ def numberOfWebResults(website):
     url = "https://www.google.com/search?q=%22" + website + "%22&hl=en"
     page = requests.get(url)
     root = html.fromstring(page.text)
-    results = root.xpath('//*[@id="resultStats"]')[0]
+    results = root.xpath('//*[@id="resultStats"]')[0]   
     text = "".join(results.itertext())
     number = re.sub('[^0-9]','', text)
     return number
