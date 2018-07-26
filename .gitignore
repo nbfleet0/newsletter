@@ -1,2 +1,3 @@
 *.pyc
 stories.txt
+.DS_Store
