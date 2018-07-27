@@ -2,6 +2,8 @@ import requests
 import urllib2
 from lxml import html
 import re
+import score
+
 
 url = "https://www.seed-db.com/accelerators/viewall?acceleratorid=1011"
 
@@ -26,16 +28,33 @@ root = html.fromstring(contents)
 for i in root.xpath('//*[@id="seedcos"]/tbody/tr'):
 	print("*ROW*")
 
+	object = []
+
+
 	angellist = i.xpath('td[3]/div/button[1]/a/@href')
-	print(angellist)
+	if not angellist:
+		object.append("")
+	else:
+		object.append(angellist[0])
+
 	crunchbase = i.xpath('td[3]/div/button[2]/a/@href')
-	print(crunchbase)
+	if not crunchbase:
+		object.append("")
+	else:
+		object.append(crunchbase[0])
 
 	box = i.xpath('td')
+
 	for k in box:
 		info = "".join(k.itertext())
 		info = "".join(info.split()).replace("\n", "")
-		print(info + ",")
+		object.append(info)
 
-    # article_text = "".join(i.itertext())
-    # print(article_text)
+	print(object)
+	# object: [angellist url, crunchbase url, exited?, name, url, acceleration date, exit value, ?, funding]
+
+	score = score(object)
+
+
+
+
