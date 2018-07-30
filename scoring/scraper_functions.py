@@ -45,7 +45,7 @@ def infoFromAngel(url):
 
 def infoFromCrunchbase(url):
 
-    print("getting crunchbase info")
+    # print("getting crunchbase info")
 
     hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -58,7 +58,7 @@ def infoFromCrunchbase(url):
     try:
         page = urllib2.urlopen(req)
     except urllib2.HTTPError, e:
-        print e.fp.read()
+         print e.fp.read()
     contents = page.read()
     root = html.fromstring(contents)
 
@@ -69,7 +69,7 @@ def infoFromCrunchbase(url):
         if contents.find("crunchbase", m.start()) != m.end(): #find crunchbase starting at 'twitter.com' start, compare starting position to ending of 'twitter.com'
             end = contents.find('"', m.start())
             twitter = contents[m.start():end]
-            print(twitter)
+            # print(twitter)
             break
 
     pos = contents.find("/search/organization.companies/field/organizations/rank_org_company/")
@@ -94,7 +94,7 @@ def infoFromCrunchbase(url):
 def getAlexaRankings(website):
 
     url = "https://www.alexa.com/siteinfo/" + website
-    print(url)
+    # print(url)
 
     req = urllib2.Request(url, headers=hdr)
     try:
@@ -141,13 +141,16 @@ def getAlexaRankings(website):
 
     search_increase = root.xpath('//*[@id="keyword-content"]/span[1]/span/span/div/span')
     if not search_increase:
-        search_increase = "0"
+        search_increase = 0
     else:
         search_increase = search_increase[0]
         search_increase = "".join(search_increase.itertext())
         search_increase = ''.join(search_increase.split())
         search_increase = search_increase.replace('%', '')
-        search_increase = float(search_increase)
+        if search_increase == "":
+            search_increase = 0
+        else:
+            search_increase = float(search_increase)
 
 
     return_obj = [rank, rank_increase, inbound_links, home_geo, bounce_rate, search_increase]
@@ -159,7 +162,7 @@ def getAlexaRankings(website):
 def numberOfWebResults(website):
     website = website.replace('https://', '').replace('http://', '').replace('www', '').replace('/', '')
     url = "https://www.google.com/search?q=%22" + website + "%22&hl=en"
-    print(url)
+    # print(url)
     page = requests.get(url)
     root = html.fromstring(page.text)
     results = root.xpath('//*[@id="resultStats"]')[0]   
@@ -174,7 +177,7 @@ def numberOfTwitterFollowers(username):
     page = requests.get(url)
     root = html.fromstring(page.text)
     results = root.xpath('//*[@id="page-container"]/div[1]/div/div[2]/div/div/div[2]/div/div/ul/li[3]/a/span[3]')
-    print(results)
+    # print(results)
     if not results:
         return 0
     results = results[0]
@@ -202,5 +205,4 @@ def numberOfTwitterFollowers(username):
 #     text = "".join(results.itertext())
 #     text.replace(',', '')
 #     return text
-
 

@@ -27,13 +27,14 @@ except urllib2.HTTPError, e:
 contents = page.read()
 root = html.fromstring(contents)
 
-print("getting seed db")
+# print("getting seed db")
 for i in root.xpath('//*[@id="seedcos"]/tbody/tr'):
-	print("*ROW*")
+	# print("*ROW*")
 
 	return_object = []
 
 	return_object.append("")
+
 	# angellist = i.xpath('td[3]/div/button[1]/a/@href')
 	# if not angellist:
 	# 	return_object.append("")
@@ -55,9 +56,9 @@ for i in root.xpath('//*[@id="seedcos"]/tbody/tr'):
 
 	# return_object: [angellist url = "", crunchbase url, exited?, name, url, acceleration date, exit value, ?, funding]
 
-	print(return_object)
+	# print(return_object)
 
-	print(score.calculateScore(return_object))
+	print(return_object[3] + ": " + str(score.calculateScore(return_object)))
 
 
 
