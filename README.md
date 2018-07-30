@@ -11,7 +11,7 @@ Weekly newsletter with new venture capital deals
 </br></br>
 <h3>Periodics:</h3>
 -daily.py: runs sources that change daily (fortune.py)</br>
--weekly.py: runs sources that change daily (techcrunch.py, vcnewsdaily.py, pehub.py)</br>
+-weekly.py: runs sources that change weekly (techcrunch.py, vcnewsdaily.py, pehub.py)</br>
 </br></br>
 <h3>Other</h3>
 -send.py: sends stories.txt by email</br>
