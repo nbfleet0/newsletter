@@ -24,15 +24,19 @@ def calculateScore(object):
 		bounce_rate = alexa_object[4]
 		search_increase = alexa_object[5]
 
-		static_web = [int(followers), int(webresults), int(rank), int(inbound_links), bounce_rate]
+		static_web = [(followers), (webresults), (rank), (inbound_links), bounce_rate]
 		print(static_web)
 
-		static_constant = int(followers) + int(webresults) - int(rank)/100 + int(inbound_links)*3 - bounce_rate
+		static_constant = followers + webresults - rank/100 + inbound_links*3 - bounce_rate*2 #super not thought through at all!
 		print(static_constant)
 
 
 		dynamic_web = [rank_increase, search_increase]
+		print(dynamic_web)
 
-		return static_constant
+		dynamic_constant = rank_increase*search_increase/100
+		print(dynamic_constant)
+
+		return (static_constant+dynamic_constant)
 
 # print(calculateScore(['https://angel.co/clustrix', 'http://www.crunchbase.com/organization/clustrix', '', 'Clustrix', 'http://www.clustrix.com', '1/2006', '', '', '$71,650,000']))

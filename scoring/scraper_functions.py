@@ -116,6 +116,7 @@ def getAlexaRankings(website):
     rank_increase = root.xpath('//*[@id="traffic-rank-content"]/div/span[2]/div[1]/span/span/div/span')[0]
     rank_increase = "".join(rank_increase.itertext())
     rank_increase = re.sub('[^0-9]','', rank_increase)
+    rank_increase = float(rank_increase)
 
 
     inbound_links = root.xpath('//*[@id="linksin-panel-content"]/div[1]/span/div/span')[0]
@@ -145,6 +146,8 @@ def getAlexaRankings(website):
         search_increase = search_increase[0]
         search_increase = "".join(search_increase.itertext())
         search_increase = ''.join(search_increase.split())
+        search_increase = search_increase.replace('%', '')
+        search_increase = float(search_increase)
 
 
     return_obj = [rank, rank_increase, inbound_links, home_geo, bounce_rate, search_increase]
@@ -162,6 +165,7 @@ def numberOfWebResults(website):
     results = root.xpath('//*[@id="resultStats"]')[0]   
     text = "".join(results.itertext())
     number = re.sub('[^0-9]','', text)
+    number = float(number)
     return number
 
 
@@ -170,6 +174,7 @@ def numberOfTwitterFollowers(username):
     page = requests.get(url)
     root = html.fromstring(page.text)
     results = root.xpath('//*[@id="page-container"]/div[1]/div/div[2]/div/div/div[2]/div/div/ul/li[3]/a/span[3]')
+    print(results)
     if not results:
         return 0
     results = results[0]
@@ -183,7 +188,7 @@ def numberOfTwitterFollowers(username):
         text = text.replace('M', '')
     else:
         modifer = 1
-
+    text = text.replace(",", "")
     number = float(text)
     number = number*modifer
 
@@ -197,6 +202,5 @@ def numberOfTwitterFollowers(username):
 #     text = "".join(results.itertext())
 #     text.replace(',', '')
 #     return text
-
 
 
