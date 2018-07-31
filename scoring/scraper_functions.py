@@ -173,7 +173,9 @@ def numberOfWebResults(website):
 
 
 def numberOfTwitterFollowers(username):
-    url = "https://twitter.com/" + username
+    # username.replace('https://twitter.com/')
+    url = "https://" + username
+    print(url)
     page = requests.get(url)
     root = html.fromstring(page.text)
     results = root.xpath('//*[@id="page-container"]/div[1]/div/div[2]/div/div/div[2]/div/div/ul/li[3]/a/span[3]')

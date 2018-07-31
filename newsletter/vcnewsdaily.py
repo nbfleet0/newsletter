@@ -7,7 +7,7 @@ import requests
 import helper_functions as helper
 
 
-def getStories():
+def getStories(lvl):
 
     contents = urlopen("https://feeds.feedburner.com/vcnewsdaily?fmt=xml").read()
     root = et.fromstring(contents)
@@ -30,12 +30,18 @@ def getStories():
             half_two = half_one[2]
             article_text = half_two.split('</div>')[0]
 
+
         # check interest
         interest_lvl = helper.checkInterestLvl(article_text)
 
 
-        if (interest_lvl > 1): #more than 2 interesting aspects of an article
-            string = "\n\nTitle: " + title + "\nDate: " + date + "\nLink: " + link + "\nArticle Text: " + article_text
+        if (interest_lvl > lvl): #more than 2 interesting aspects of an article
+            print("Adding article")
+
+            article_text = article_text.split("<br/><br/>About")[0]
+            print(article_text)
+
+            string = "\n\n<b><a href='" + link + "'>" + title + "</a></b>\n\n" + article_text
             save_file = open("stories.txt", 'a+')
             save_file.write(string)
             save_file.close()

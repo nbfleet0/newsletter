@@ -6,6 +6,8 @@ def calculateScore(object):
     # object: [angellist url, crunchbase url, exited?, name, url, acceleration date, exit value, ?, funding]
 	if(object[2] == "" and object[4] != "None" and object[1] != ""): #if comnpany hasnt exited or died
 
+	# ["", "CB.COM","","Even","even.com","","","",""]
+
 		cbinfo = scraper_functions.infoFromCrunchbase(object[1]) # angelinfo: [twitter, cbrank, funding]
 
 		followers = scraper_functions.numberOfTwitterFollowers(cbinfo[0])
@@ -25,22 +27,22 @@ def calculateScore(object):
 		search_increase = alexa_object[5]
 
 		static_web = [int(followers), int(webresults), int(rank), int(inbound_links), bounce_rate]
-		# print(static_web)
 
-		static_constant = int(followers) + int(webresults) - int(rank)/1000 + int(inbound_links)*3 - bounce_rate*2 #super not thought through at all!
-		# print(static_constant)
 
+		print(static_web)
+		static_constant = (int(followers)/10 + int(webresults)/10 + int(inbound_links)*5 - bounce_rate*2)/(int(rank)/50000) 
+		print(static_constant)
 
 		dynamic_web = [rank_increase, search_increase]
-		# print(dynamic_web)
+		print(dynamic_web)
 
 		dynamic_constant = rank_increase
 
-		dynamic_constant = rank_increase*search_increase/100
-		# print(dynamic_constant)
+		dynamic_constant = rank_increase*search_increase/1000
+		print(dynamic_constant)
 
 		return (static_constant+dynamic_constant)
 	else:
 		return object[3] + " exited, has no crunchbase, or no website"
 
-# print(calculateScore(['https://angel.co/clustrix', 'http://www.crunchbase.com/organization/clustrix', '', 'Clustrix', 'http://www.clustrix.com', '1/2006', '', '', '$71,650,000']))
+print(calculateScore(['', 'https://www.crunchbase.com/organization/clustrix', '', 'clustrix', 'www.clustrix.com', '6/2010', '$15,000,000', 'H', '$1,000,000']))

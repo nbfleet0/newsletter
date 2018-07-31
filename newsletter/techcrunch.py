@@ -7,7 +7,7 @@ import requests
 import helper_functions as helper
 
 
-def getStories():
+def getStories(lvl):
 
     contents = urlopen("https://feeds.feedburner.com/TechCrunch/fundings-exits").read()
     root = et.fromstring(contents)
@@ -21,12 +21,17 @@ def getStories():
         link = item.find('link').text
         article_text = item.find('description').text
 
+
         # check for interesting geographies
         interest_lvl = helper.checkInterestLvl(article_text)
 
-        if (interest_lvl > 1): #more than 2 interesting aspects of an article
+        if (interest_lvl > lvl): #more than 2 interesting aspects of an article
+            print("Adding article")
 
-            string = "\n\nTitle: " + title + "\nDate: " + date + "\nLink: " + link + "\nArticle Text: " + article_text
+            article_text = article_text.split("<br/><br/>About")[0]
+            print(article_text)
+
+            string = "\n\n<b><a href='" + link + "'>" + title + "</a></b>\n\n" + article_text
             save_file = open("stories.txt", 'a+')
             save_file.write(string.encode('utf-8'))
             save_file.close()

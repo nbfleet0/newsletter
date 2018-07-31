@@ -5,7 +5,7 @@ import helper_functions as helper
 import cookielib
 
 
-def getStories():
+def getStories(lvl):
 
     hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -35,9 +35,13 @@ def getStories():
         # check for interesting geographies
         interest_lvl = helper.checkInterestLvl(article_text)
 
-        if (interest_lvl > 1): #more than 2 interesting aspects of an article
+        if (interest_lvl > lvl): #more than 2 interesting aspects of an article
+            print("Adding article")
 
-            string = "\n\nTitle: " + title + "\nDate: " + date + "\nLink: " + link + "\nArticle Text: " + article_text
+            article_text = article_text.split("<br/><br/>About")[0]
+            print(article_text)
+
+            string = "\n\n<b><a href='" + link + "'>" + title + "</a></b>\n\n" + article_text
             save_file = open("stories.txt", 'a+')
             save_file.write(string.encode('utf-8'))
             save_file.close()
