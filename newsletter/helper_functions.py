@@ -1,5 +1,6 @@
 def checkInterestLvl(article_text):
     interest_lvl = 0
+    word_array = []
 
     text_file = open("vclist.txt", "r")
     vc_list = text_file.read().split(',')
@@ -15,14 +16,21 @@ def checkInterestLvl(article_text):
 
     for geo in geo_list:
         if geo.lower() in article_text.lower():
-            interest_lvl += 1
+            word_array.append(geo)
 
     for vc in vc_list:
         if vc.lower() in article_text.lower():
-            interest_lvl += 1
+            word_array.append(vc)            
 
     for keyword in keyword_list:
         if keyword.lower() in article_text.lower():
-            interest_lvl += 1
+            word_array.append(keyword)
 
-    return interest_lvl
+    for element in word_array: #sanatize
+        element.strip()
+        if element == "":
+            word_array.remove(element)
+        elif element == "\n":
+            word_array.remove(element)
+            
+    return word_array

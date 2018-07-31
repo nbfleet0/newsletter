@@ -5,8 +5,9 @@ import pehub
 
 
 if __name__ == '__main__':
-	fortune.getStories(3)
-	techcrunch.getStories(3)
-	vcnewsdaily.getStories(3)
-	pehub.getStories(3)
+	open('stories.txt', 'w').close()
+	fortune.getStories(2)
+	techcrunch.getStories(2)
+	vcnewsdaily.getStories(2)
+	pehub.getStories(2)
  

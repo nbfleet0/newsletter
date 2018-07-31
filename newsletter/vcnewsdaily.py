@@ -32,14 +32,22 @@ def getStories(lvl):
 
 
         # check interest
-        interest_lvl = helper.checkInterestLvl(article_text)
-
+        interest_array = helper.checkInterestLvl(article_text)
+        interest_lvl = len(interest_array)
+        print(interest_array)
 
         if (interest_lvl > lvl): #more than 2 interesting aspects of an article
             print("Adding article")
 
             article_text = article_text.split("<br/><br/>About")[0]
             print(article_text)
+
+            print(interest_array)
+
+            for word in interest_array:
+                plural = word + "s"
+                article_text = article_text.replace(plural, "<b>" + plural + "</b>").replace(word, "<b>" + word + "</b>").replace(word.capitalize(), "<b>" + word.capitalize() + "</b>")
+
 
             string = "\n\n<b><a href='" + link + "'>" + title + "</a></b>\n\n" + article_text
             save_file = open("stories.txt", 'a+')
