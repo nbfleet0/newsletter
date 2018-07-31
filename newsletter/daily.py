@@ -1,3 +1,0 @@
-import fortune
-
-fortune.getStories()

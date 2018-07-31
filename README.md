@@ -9,9 +9,6 @@ Weekly newsletter with new venture capital deals
 -vcnewsdaily.py: "https://feeds.feedburner.com/TechCrunch/fundings-exits" (new unique stories every week)</br>
 -pehub.py: "https://feeds.feedburner.com/TechCrunch/fundings-exits" (new unique stories every week)</br>
 </br></br>
-<h3>Periodics:</h3>
--daily.py: runs sources that change daily (fortune.py)</br>
--weekly.py: runs sources that change weekly (techcrunch.py, vcnewsdaily.py, pehub.py)</br>
 </br></br>
 <h3>Other</h3>
 -send.py: sends stories.txt by email</br>
