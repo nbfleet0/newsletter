@@ -37,8 +37,8 @@ def calculateScore(object):
 		print(dynamic_web)
 
 		dynamic_constant = rank_increase
-
 		dynamic_constant = rank_increase*search_increase/1000
+
 		print(dynamic_constant)
 
 		return (static_constant+dynamic_constant)

@@ -39,7 +39,7 @@ def getStories(lvl):
         if (interest_lvl > lvl): #more than 2 interesting aspects of an article
             print("Adding article")
 
-            article_text = article_text.split("<br/><br/>About")[0]
+            article_text = article_text.split("<br/><br/>")[0]
             print(article_text)
 
             print(interest_array)
@@ -49,7 +49,7 @@ def getStories(lvl):
                 article_text = article_text.replace(plural, "<b>" + plural + "</b>").replace(word, "<b>" + word + "</b>").replace(word.capitalize(), "<b>" + word.capitalize() + "</b>")
 
 
-            string = "\n\n<b><a href='" + link + "'>" + title + "</a></b>\n\n" + article_text
+            string = "<tr><td><h2 style='display:inline;'><a href='" + link + "' style='color:#006699;'>" + title + "</a></h2></br><i style='color:#7f8c8d'>" + ", ".join(interest_array) + "</i></br></br>" + article_text + "</td></tr>"
             save_file = open("stories.txt", 'a+')
             save_file.write(string)
             save_file.close()

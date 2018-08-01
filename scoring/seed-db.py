@@ -28,7 +28,7 @@ contents = page.read()
 root = html.fromstring(contents)
 
 # print("getting seed db")
-for i in root.xpath('//*[@id="seedcos"]/tbody/tr'):
+for i in reversed(root.xpath('//*[@id="seedcos"]/tbody/tr')):
 	# print("*ROW*")
 
 	return_object = []
