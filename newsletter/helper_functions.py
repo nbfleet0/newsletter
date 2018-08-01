@@ -26,11 +26,15 @@ def checkInterestLvl(article_text):
         if keyword.lower() in article_text.lower():
             word_array.append(keyword)
 
-    for element in word_array: #sanatize
-        element.strip()
-        if element == "":
-            word_array.remove(element)
-        elif element == "\n":
-            word_array.remove(element)
+    while "" in word_array: word_array.remove("")
+    while "\n" in word_array: word_array.remove("\n")
+
+    # for element in word_array: #sanatize
+    #     element.strip()
+    #     if element == "":
+    #         word_array.remove(element)
+    #     if element == "\n":
+    #         print("removing new line")
+    #         word_array.remove(element)
             
     return word_array
