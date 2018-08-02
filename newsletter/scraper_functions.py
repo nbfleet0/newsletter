@@ -59,6 +59,7 @@ def infoFromCrunchbase(url):
         page = urllib2.urlopen(req)
     except urllib2.HTTPError, e:
          print e.fp.read()
+         return 0
     contents = page.read()
     root = html.fromstring(contents)
 
@@ -84,11 +85,14 @@ def infoFromCrunchbase(url):
     if (end - pos) == 0:
         funding = ""
 
-    site = root.xpath('//*[@id="section-overview"]/mat-card/div[2]/div/fields-card[3]/div/div/span[2]/field-formatter/link-formatter/a')
+    site = root.xpath('//*[@id="section-overview"]/mat-card/div[2]/div/fields-card[3]/div/div/span[2]/field-formatter/link-formatter/a')[0]
+    site = "".join(site.itertext())
+    site = site.replace(" ", "")
+    print("Site")
+    print(site)
 
 
-
-    return [twitter, cbrank, funding]
+    return [twitter, cbrank, funding, site]
 
 
     

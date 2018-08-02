@@ -3,7 +3,7 @@ import requests
 import helper_functions as helper
 from lxml import html
 import datetime
-
+import score
 
 def getStories(lvl):
     page = requests.get("http://fortune.com/newsletter/termsheet/?scrape=1")
@@ -43,11 +43,13 @@ def getStories(lvl):
 
                 title = article_text.split(",")[0] #company name
 
+                buzz_score = score.getBuzzScore([title, article_text])
+
                 for word in interest_array:
                     bold = "<b>" + word + "</b>"
                     article_text = article_text.replace(word, bold).replace(word.capitalize(), "<b>" + word.capitalize() + "</b>")
 
-                string = "<tr><td><h2 style='display:inline;'><a href='" + link + "' style='color:#006699;'>" + title + "</a></h2></br><i style='color:#7f8c8d'>" + ", ".join(interest_array) + "</i></br></br>" + article_text + "</td></tr>"
+                string = "<tr><td><h2 style='display:inline;'><a href='" + link + "' style='color:#006699;'>" + title + "</a> (Buzz Score: " + str(int(buzz_score)) + ")</h2></br><i style='color:#7f8c8d'>" + ", ".join(interest_array) + "</i></br></br>" + article_text + "</td></tr>"
                 save_file = open("stories.txt", 'a+')
                 save_file.write(string.encode('utf-8'))
                 save_file.close()

@@ -5,6 +5,7 @@ except ImportError:
 import xml.etree.ElementTree as et
 import requests
 import helper_functions as helper
+import score
 
 
 def getStories(lvl):
@@ -44,13 +45,16 @@ def getStories(lvl):
 
             print(interest_array)
 
+            buzz_score = score.getBuzzScore([title, article_text])
+
             for word in interest_array:
                 plural = word + "s"
                 article_text = article_text.replace(plural, "<b>" + plural + "</b>").replace(word, "<b>" + word + "</b>").replace(word.capitalize(), "<b>" + word.capitalize() + "</b>")
 
 
-            string = "<tr><td><h2 style='display:inline;'><a href='" + link + "' style='color:#006699;'>" + title + "</a></h2></br><i style='color:#7f8c8d'>" + ", ".join(interest_array) + "</i></br></br>" + article_text + "</td></tr>"
+            string = "<tr><td><h2 style='display:inline;'><a href='" + link + "' style='color:#006699;'>" + title + "</a> (Buzz Score: " + str(int(buzz_score)) + ")</h2></br><i style='color:#7f8c8d'>" + ", ".join(interest_array) + "</i></br></br>" + article_text + "</td></tr>"
             save_file = open("stories.txt", 'a+')
             save_file.write(string)
             save_file.close()
+
 
