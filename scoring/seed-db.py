@@ -3,6 +3,7 @@ import urllib2
 from lxml import html
 import re
 import score
+import sys
 
 
 # acceleratorid's: techstars - 3012, 500startups - 2001, angelpad - 2002, dreamid - 8001, seedcamp - 4005,
@@ -26,6 +27,16 @@ except urllib2.HTTPError, e:
     print e.fp.read()
 contents = page.read()
 root = html.fromstring(contents)
+
+all_scores = []
+max_array = []
+min_array = []
+
+file = open("list.csv", "w").close() #clear file
+
+date = int(sys.argv[1]) #command line argument to only get arguments after year
+
+
 
 # print("getting seed db")
 for i in root.xpath('//*[@id="seedcos"]/tbody/tr'):
@@ -55,11 +66,46 @@ for i in root.xpath('//*[@id="seedcos"]/tbody/tr'):
 		return_object.append(info)
 
 	# return_object: [angellist url = "", crunchbase url, exited?, name, url, acceleration date, exit value, ?, funding]
+	print(return_object)
+	skip = False
 
-	# print(return_object)
+	if(date != ""):
+		a_date = int(return_object[5].split("/")[1])
+		if(a_date < date):
+			skip = True
 
-	print(return_object[3] + ": " + str(score.calculateScore(return_object)))
+	if(skip == False):
+		if(return_object[2] == "" and return_object[4] != "None" and return_object[1] != ""): 
+			pass_object = [return_object[1], return_object[4], return_object[8], return_object[3]] #[cb url, url, funding, name]
+			reutrn_val = score.calculateScore(pass_object) 
+
+			print(reutrn_val)
+
+			if(reutrn_val[0] != 0):
+				string = return_object[3] + ": " + str(int(reutrn_val[0]))
+				all_scores.append(string)
+				file = open("list.csv", "a+")
+				file.write(string + ",")
+				file.close()
 
 
+			# i = 0
+			# for index, item in enumerate(max_array):
+			# 	if(reutrn_val[i] > max_array[i]):
+			# 		max_array[i] = int(reutrn_val[i])
+			# 	i+=1
+			# i = 0
+			# for index, item in enumerate(min_array):
+			# 	if(reutrn_val[i] < min_array[i]):
+			# 		min_array[i] = int(reutrn_val[i])
+			# 	i+=1
+
+			# print(return_object[3] + ": " + str(score.calculateScore(return_object)))
+			print("all:")
+			print(all_scores)
+		else:
+			print("skipping " + return_object[3])
+	else:
+		print("year is too early for " + return_object[3])
 
 

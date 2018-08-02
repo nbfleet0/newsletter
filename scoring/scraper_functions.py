@@ -116,7 +116,10 @@ def getAlexaRankings(website):
     rank_increase = root.xpath('//*[@id="traffic-rank-content"]/div/span[2]/div[1]/span/span/div/span')[0]
     rank_increase = "".join(rank_increase.itertext())
     rank_increase = re.sub('[^0-9]','', rank_increase)
-    rank_increase = float(rank_increase)
+    try:
+        rank_increase = float(rank_increase)
+    except ValueError:
+        rank_increase = 1
 
 
     inbound_links = root.xpath('//*[@id="linksin-panel-content"]/div[1]/span/div/span')[0]
@@ -162,10 +165,9 @@ def getAlexaRankings(website):
 def numberOfWebResults(website):
     website = website.replace('https://', '').replace('http://', '').replace('www', '').replace('/', '')
     url = "https://www.google.com/search?q=%22" + website + "%22&hl=en"
-    # print(url)
     page = requests.get(url)
     root = html.fromstring(page.text)
-    results = root.xpath('//*[@id="resultStats"]')[0]   
+    results = root.xpath('//*[@id="resultStats"]')[0]
     text = "".join(results.itertext())
     number = re.sub('[^0-9]','', text)
     number = float(number)
@@ -173,8 +175,11 @@ def numberOfWebResults(website):
 
 
 def numberOfTwitterFollowers(username):
-    # username.replace('https://twitter.com/')
-    url = "https://" + username
+    print(username)
+    username = username.replace('https://twitter.com/', '')
+    username = username.replace('http://twitter.com/', '')
+    username = username.replace('twitter.com/', '')
+    url = "https://twitter.com/" + username
     print(url)
     page = requests.get(url)
     root = html.fromstring(page.text)
@@ -189,13 +194,13 @@ def numberOfTwitterFollowers(username):
         modifier = 1000
         text = text.replace('K', '')
     elif(text.find('M') != -1):
-        modifer = 1000000
+        modifier = 1000000
         text = text.replace('M', '')
     else:
-        modifer = 1
+        modifier = 1
     text = text.replace(",", "")
     number = float(text)
-    number = number*modifer
+    number = number*modifier
 
     return number
 
