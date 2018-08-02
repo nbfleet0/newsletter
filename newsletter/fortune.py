@@ -41,6 +41,8 @@ def getStories(lvl):
                 article_text = article_text.split("<br/><br/>")[0]
                 print(article_text)
 
+                title = article_text.split(",")[0] #company name
+
                 for word in interest_array:
                     bold = "<b>" + word + "</b>"
                     article_text = article_text.replace(word, bold).replace(word.capitalize(), "<b>" + word.capitalize() + "</b>")

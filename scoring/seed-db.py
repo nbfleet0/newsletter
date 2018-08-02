@@ -101,6 +101,7 @@ for i in root.xpath('//*[@id="seedcos"]/tbody/tr'):
 			# 	i+=1
 
 			# print(return_object[3] + ": " + str(score.calculateScore(return_object)))
+			
 			print("all:")
 			print(all_scores)
 		else:
