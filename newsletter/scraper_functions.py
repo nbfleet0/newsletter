@@ -17,7 +17,9 @@ def infoFromAngel(url):
     try:
         page = urllib2.urlopen(req)
     except urllib2.HTTPError, e:
+        print("error")
         print e.fp.read()
+
     contents = page.read()
     root = html.fromstring(contents)
 
@@ -58,7 +60,10 @@ def infoFromCrunchbase(url):
     try:
         page = urllib2.urlopen(req)
     except urllib2.HTTPError, e:
-         print e.fp.read()
+         f = open("error.html", 'w')
+         f.write(e.fp.read())
+         f.close()
+         print e
          return 0
     contents = page.read()
     root = html.fromstring(contents)
@@ -85,7 +90,12 @@ def infoFromCrunchbase(url):
     if (end - pos) == 0:
         funding = ""
 
-    site = root.xpath('//*[@id="section-overview"]/mat-card/div[2]/div/fields-card[3]/div/div/span[2]/field-formatter/link-formatter/a')[0]
+    site = root.xpath('//*[@id="section-overview"]/mat-card/div[2]/div/fields-card[3]/div/div/span[2]/field-formatter/link-formatter/a')
+    if not site:
+        site = root.xpath('//*[@id="section-overview"]/mat-card/div[2]/div/fields-card[2]/div/div/span[2]/field-formatter/link-formatter/a')
+    if not site:
+        site = root.xpath('//*[@id="section-overview"]/mat-card/div[2]/div/fields-card[4]/div/div/span[2]/field-formatter/link-formatter/a')
+    site = site[0]
     site = "".join(site.itertext())
     site = site.replace(" ", "")
     print("Site")
@@ -115,7 +125,7 @@ def getAlexaRankings(website):
     rank = "".join(rank.itertext())
     rank = re.sub('[^0-9]','', rank)
     if(rank == ""):
-        return [0,0,0,0,0,0]
+        return [0,0,0,0,0,0,0]
     rank = int(rank)
 
 
@@ -161,8 +171,16 @@ def getAlexaRankings(website):
         else:
             search_increase = float(search_increase)
 
+    rank_change = root.xpath('//*[@id="traffic-rank-content"]/div/span[2]/div[1]/span/span/div/span/@class')[0]
+    rank_change_string = str(rank_change) + ""
+    if("change-up" in str(rank_change_string)):
+        print("change up")
+        rank_change = -1
+    else:
+        print("change down")
+        rank_change = 1
 
-    return_obj = [rank, rank_increase, inbound_links, home_geo, bounce_rate, search_increase]
+    return_obj = [rank, rank_increase, inbound_links, home_geo, bounce_rate, search_increase, rank_change]
     
     return return_obj
 

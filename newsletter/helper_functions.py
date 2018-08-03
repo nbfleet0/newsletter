@@ -48,13 +48,12 @@ def extractName(story_object): #accepts [headline, body]
     headline = story_object[0]
     body = story_object[1]
 
-    first = headline.split(" ")[0]
-    if(first == body.split(" ")[0]):
-        print("match")
-        second = headline.split(" ")[1]
-        if(second == body.split(" ")[1]):
-            third = headline.split(" ")[2]
-            if(third == body.split(" ")[2]):
+    first = headline.split(" ")[0].replace(",", "")
+    if(first == body.split(" ")[0].replace(",", "")):
+        second = headline.split(" ")[1].replace(",", "")
+        if(second == body.split(" ")[1].replace(",", "")):
+            third = headline.split(" ")[2].replace(",", "")
+            if(third == body.split(" ")[2].replace(",", "")):
                 return first + " " + second + " " + third
             return first + " " + second
         return first
@@ -67,6 +66,8 @@ def extractName(story_object): #accepts [headline, body]
         for word in after:
             if(word[0].isupper()):
                 string = string + " " + word
+            else:
+                return string
         return string
 
     else:
@@ -110,3 +111,4 @@ def extractName(story_object): #accepts [headline, body]
                 print(string)
                 return string
                 break
+

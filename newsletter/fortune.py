@@ -4,13 +4,23 @@ import helper_functions as helper
 from lxml import html
 import datetime
 import score
+import time
 
 def getStories(lvl):
     page = requests.get("http://fortune.com/newsletter/termsheet/?scrape=1")
     root = html.fromstring(page.text)
     tree = root.getroottree()
 
-    for i in root.xpath('/html/body/custom/table[1]/tr[2]/td/table/tr[10]/td/table/tr/td/table/tr[1]/td/p'):
+    i = 0
+    linkcheck = root.xpath('/html/body/custom/table[1]/tr[2]/td/table/tr[10]/td/table/tr/td/table/tr[1]/td/p[' + str(i) + ']')
+    while not linkcheck:
+        i += 1
+        print(i)
+        print(linkcheck)
+        time.sleep(1)
+        linkcheck = root.xpath('/html/body/custom/table[1]/tr[2]/td/table/tr[10]/td/table/tr/td/table/tr[1]/td/p[' + str(i) + ']')
+
+    for i in root.xpath('/html/body/custom/table[1]/tr[2]/td/table/tr[10]/td/table/tr/td/table/tr[1]/td/p[' + str(i) + ']'):
         now = datetime.datetime.now()
         date = now.strftime("%Y-%m-%d")
         link = i.xpath('a/@href')[0]

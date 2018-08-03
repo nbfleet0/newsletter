@@ -25,6 +25,11 @@ def calculateScore(object):
 	home_geo = alexa_object[3]
 	bounce_rate = alexa_object[4]
 	search_increase = alexa_object[5]
+	rank_change = alexa_object[6]
+
+	rank_increase = rank_increase*rank_change
+	print("rank change")
+	print(rank_change)
 
 	static_web = [int(followers), int(webresults), int(rank), int(inbound_links), bounce_rate]
 
@@ -33,19 +38,31 @@ def calculateScore(object):
 
 	print(static_web)
 
-	static_constant = (int(followers)/10 + int(webresults)/10 + int(inbound_links)*5 - bounce_rate*2)/float(rank)
+	static_constant = (int(followers)/4 + int(webresults) + int(inbound_links)*10 - float(rank)/10000)/(bounce_rate/100)
+#top = (356000 + 500000 + 8000*10 - 300/10000)/(50/100)
 
 	print(static_constant)
+	#best: 438000
+
 
 	dynamic_web = [rank_increase, search_increase]
 	print(dynamic_web)
 
-	dynamic_constant = rank_increase
+	rank_increase = (rank_increase/rank)*100 #express as a percentage
 
-	dynamic_constant = rank_increase*search_increase/1000
+	if rank_increase == 0:
+		rank_increase = 1
+	if search_increase == 0:
+		search_increase = 1
+
+	dynamic_constant = rank_increase*search_increase
 	print(dynamic_constant)
 
-	all_web = [static_constant+dynamic_constant, int(followers), int(webresults), int(rank), int(inbound_links), bounce_rate, rank_increase, search_increase]
+	total_score = (static_constant+dynamic_constant)/500 #500000 0-1, 50000 0-10, 5000 0-100
+
+	print(total_score)
+
+	all_web = [total_score, int(followers), int(webresults), int(rank), int(inbound_links), bounce_rate, rank_increase, search_increase]
 
 
 	return all_web
@@ -54,11 +71,14 @@ def getBuzzScore(story_obj):
 	name = helper.extractName(story_obj)
 
 	cburl = helper.getCrunchbaseURL(name)
+	print(cburl)
 
 	cbinfo = scraper_functions.infoFromCrunchbase(cburl)
 
-	print(cbinfo)
-
-	buzz_score = calculateScore([cburl, cbinfo[3], "", name, cbinfo])
-	return buzz_score[0]
+	if(cbinfo != 0):
+		buzz_score = calculateScore([cburl, cbinfo[3], "", name, cbinfo])
+		return buzz_score[0]
+	else:
+		print("no cbinfo")
+		return 0
 
