@@ -169,6 +169,7 @@ def getAlexaRankings(website):
         if search_increase == "":
             search_increase = 0
         else:
+            search_increase = search_increase.replace(",", "")
             search_increase = float(search_increase)
 
     rank_change = root.xpath('//*[@id="traffic-rank-content"]/div/span[2]/div[1]/span/span/div/span/@class')[0]
