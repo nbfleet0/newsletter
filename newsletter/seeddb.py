@@ -21,6 +21,7 @@ def getBuzzyCompanies(number, a_id, date):
 	   'Connection': 'keep-alive'}
 
 	obj = {}
+	all_scores = []
 	for accelerator in a_id:
 
 		url = "https://www.seed-db.com/accelerators/viewall?acceleratorid=" + str(accelerator)
@@ -33,7 +34,6 @@ def getBuzzyCompanies(number, a_id, date):
 		contents = page.read()
 		root = html.fromstring(contents)
 
-		all_scores = []
 		max_array = []
 		min_array = []
 
