@@ -16,6 +16,8 @@ def calculateScore(object):
 	if(funding == ""):
 		funding = object[2] #fallback
 	webresults = scraper_functions.numberOfWebResults(object[1])
+	if webresults == 0:
+		print("WARNING - NO WEB RESULT DATA")
 
 	alexa_object = scraper_functions.getAlexaRankings(object[1].replace('https://', '').replace('http://', '')) # [rank, rank_increase, inbound_links, home_geo, bounce_rate%, search_increase%
 

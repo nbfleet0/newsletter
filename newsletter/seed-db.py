@@ -45,7 +45,7 @@ else:
 
 
 
-# print("getting seed db")
+print("getting seed db")
 for i in root.xpath('//*[@id="seedcos"]/tbody/tr'):
 
 	return_object = []
@@ -99,7 +99,9 @@ for i in root.xpath('//*[@id="seedcos"]/tbody/tr'):
 	else:
 		print("year is too early for " + return_object[3])
 
-top_scores = nlargest(10, obj, key=obj.get)
+
+top_scores = sorted(obj, key=obj.get, reverse=True)[:10]
+# top_scores = nlargest(10, obj, key=obj.get)
 print(top_scores)
 
 

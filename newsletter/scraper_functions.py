@@ -188,11 +188,14 @@ def getAlexaRankings(website):
 
 
 def numberOfWebResults(website):
-    website = website.replace('https://', '').replace('http://', '').replace('www', '').replace('/', '')
+    website = website.replace('https://', '').replace('http://', '').replace('www.', '').replace('/', '')
     url = "https://www.google.com/search?q=%22" + website + "%22&hl=en"
     page = requests.get(url)
     root = html.fromstring(page.text)
-    results = root.xpath('//*[@id="resultStats"]')[0]
+    results = root.xpath('//*[@id="resultStats"]')
+    if not results:
+        return 0
+    results = results[0]
     text = "".join(results.itertext())
     number = re.sub('[^0-9]','', text)
     number = float(number)
