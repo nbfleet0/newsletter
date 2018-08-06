@@ -16,26 +16,22 @@ def checkInterestLvl(article_text):
 
     for geo in geo_list:
         if geo.lower() in article_text.lower():
-            word_array.append(geo)
+            if geo not in word_array:
+                word_array.append(geo)
 
     for vc in vc_list:
         if vc.lower() in article_text.lower():
-            word_array.append(vc)            
+            if vc not in word_array:
+                word_array.append(vc)            
 
     for keyword in keyword_list:
         if keyword.lower() in article_text.lower():
-            word_array.append(keyword)
+            if keyword not in word_array:
+                word_array.append(keyword)
 
     while "" in word_array: word_array.remove("")
     while "\n" in word_array: word_array.remove("\n")
 
-    # for element in word_array: #sanatize
-    #     element.strip()
-    #     if element == "":
-    #         word_array.remove(element)
-    #     if element == "\n":
-    #         print("removing new line")
-    #         word_array.remove(element)
             
     return word_array
 
@@ -72,8 +68,8 @@ def extractName(story_object): #accepts [headline, body]
 
     else:
         trailing_verbs = ["Scores", "Pulls", "Raises", "Announces", "Completes", "Lands", "Snags", "Procures", "Nabs", "Bags", "Closes", 
-        "Attracts", "Gathers", "Inks", "Picks", "Rakes", "Takes","scores", "pulls", "raises", "announces", "completes", "lands", "snags", "procures", "nabs", "bags", "closes", 
-        "attracts", "gathers", "inks", "picks", "rakes", "takes"]
+        "Attracts", "Gathers", "Inks", "Picks", "Rakes", "Takes", "Racks", "scores", "pulls", "raises", "announces", "completes", "lands", "snags", "procures", "nabs", "bags", "closes", 
+        "attracts", "gathers", "inks", "picks", "rakes", "takes", "racks"]
 
         string = []
         for word in trailing_verbs:
@@ -111,4 +107,6 @@ def extractName(story_object): #accepts [headline, body]
                 print(string)
                 return string
                 break
+
+    return "" #worst case
 

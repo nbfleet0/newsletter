@@ -2,6 +2,7 @@ import fortune
 import techcrunch
 import vcnewsdaily
 import pehub
+import seeddb
 import time
 
 
@@ -17,7 +18,24 @@ if __name__ == '__main__':
 	pehub.getStories(1)
 
 	f = open('stories.txt', 'a')
-	f.write('</table></center></html>')
+	f.write('</table></center>')
 	f.close()
+
+
+	file = open("list.csv", "w").close() #clear file, list.csv is only used for debugging
+
+
+	f = open('buzz.txt', 'w')
+	f.write('<br /><br /><center><table width="50%" style="border: 1px solid black; background-color:#ffffff" cellpadding="2"><tr><td align="center" style="padding-left:5px;padding-right:5px;"><h2>Buzzy Companies</h2></td></tr>')
+	f.close()
+	time.sleep(1)
+
+	seeddb.getBuzzyCompanies(10, [2001, 3012, 1011], 2018) #number of top companies, array of acclerator id's from seed-db.com, earliest year we're interested in
+
+	f = open('buzz.txt', 'a')
+	f.write('</table></center>')
+	f.close()
+
+
 
  

@@ -56,6 +56,11 @@ def infoFromCrunchbase(url):
        'Accept-Language': 'en-US,en;q=0.8',
        'Connection': 'keep-alive'}
 
+    url_post = url.split("//")
+    url = url_post[0] + "//" + urllib2.quote(url_post[1].encode('utf8')) #for url's with special characters
+    print(url)
+
+
     req = urllib2.Request(url, headers=hdr)
     try:
         page = urllib2.urlopen(req)
@@ -262,8 +267,8 @@ def extractName(story_object): #accepts [headline, body]
         return first
 
     else:
-        trailing_verbs = ["Scores", "Pulls", "Raises", "Announces", "Completes", "Lands", "Snags", "Procures", "Nabs", "Bags", "Closes", 
-        "Attracts", "Gathers", "Inks", "Picks", "Rakes", "Takes","scores", "pulls", "raises", "announces", "completes", "lands", "snags", "procures", "nabs", "bags", "closes", 
+        trailing_verbs = ["Receives", "Scores", "Pulls", "Raises", "Announces", "Completes", "Lands", "Snags", "Procures", "Nabs", "Bags", "Closes", 
+        "Attracts", "Gathers", "Inks", "Picks", "Rakes", "Takes","receives", "scores", "pulls", "raises", "announces", "completes", "lands", "snags", "procures", "nabs", "bags", "closes", 
         "attracts", "gathers", "inks", "picks", "rakes", "takes"]
 
         string = []
@@ -302,4 +307,3 @@ def extractName(story_object): #accepts [headline, body]
                 print(string)
                 return string
                 break
-

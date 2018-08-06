@@ -71,6 +71,9 @@ def calculateScore(object):
 
 def getBuzzScore(story_obj):
 	name = helper.extractName(story_obj)
+	if name == "":
+		print("couldnt find name for " + story_obj[0])
+		return 0
 
 	cburl = helper.getCrunchbaseURL(name)
 	print(cburl)
@@ -83,4 +86,3 @@ def getBuzzScore(story_obj):
 	else:
 		print("no cbinfo")
 		return 0
-
