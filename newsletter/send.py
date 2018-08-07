@@ -2,7 +2,7 @@ import smtplib
 from smtplib import SMTPException
 
 
-me = "arbordata@arborventures.com"
+me = "arborventuresdata@gmail.com"
 you = "adambarrneuwirth@gmail.com"
 
 stories = open("stories.txt", "r")
@@ -13,7 +13,7 @@ buzz = open("buzz.txt", "r")
 string_buzz = buzz.read().replace('\n', '</br>')
 buzz.close()
 
-message = """From: Arbor Data <arbordata@arborventures.com>
+message = """From: Arbor Ventures <arborventuresdata@gmail.com>
 To: Adam Barr-Neuwirth <adambarrneuwirth@gmail.com>
 MIME-Version: 1.0
 Content-type: text/html; charset=us-ascii
@@ -26,7 +26,7 @@ Subject: Arbor Ventures Data Digest
 server = smtplib.SMTP('smtp.gmail.com:587')
 server.ehlo()
 server.starttls()
-server.login("adambarrneuwirth", "PASSWORD")
+server.login("arborventuresdata", "8arbor88")
 text = message
 server.sendmail(me, you, text)
 server.quit()
