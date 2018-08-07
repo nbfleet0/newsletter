@@ -99,12 +99,12 @@ def getBuzzyCompanies(number, a_id, date, ilvl):
 			else:
 				print("year is too early for " + return_object[3])
 
-	assembleTop(number, obj)
+	assembleTop(number, obj, fintech_obj)
 
-def assembleTop(number, obj):
+def assembleTop(number, obj, fintech_obj):
 	top_scores = sorted(obj, key=obj.get, reverse=True)[:number]
 
-	fintech_top_scores = sorted(obj, key=fintech_obj.get, reverse=True)[:number]
+	fintech_top_scores = sorted(fintech_obj, key=fintech_obj.get, reverse=True)[:number]
 
 	file = open("buzz.txt", "a+")
 	i = 0

@@ -30,11 +30,11 @@ if __name__ == '__main__':
 	f.close()
 
 	f = open('fintech_buzz.txt', 'w')
-	f.write('<table width="50%" style="border: 1px solid black; background-color:#ffffff" cellpadding="2"><tr><td align="center" style="padding-left:5px;padding-right:5px;"><h2>Buzzy Companies</h2></td></tr>')
+	f.write('<table width="50%" style="border: 1px solid black; background-color:#ffffff" cellpadding="2"><tr><td align="center" style="padding-left:5px;padding-right:5px;"><h2>Buzzy Fintech Companies</h2></td></tr>')
 	f.close()
 	time.sleep(1)
 
-	seeddb.getBuzzyCompanies(10, [2001, 1011], 2018, 1) #number of top companies, array of acclerator id's from seed-db.com, earliest year we're interested in, interest level threshold
+	seeddb.getBuzzyCompanies(10, [2006], 2012, 1) #number of top companies, array of acclerator id's from seed-db.com, earliest year we're interested in, interest level threshold
 
 	f = open('buzz.txt', 'a')
 	f.write('</table>')

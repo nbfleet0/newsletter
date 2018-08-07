@@ -110,8 +110,11 @@ def infoFromCrunchbase(url):
     if not site:
         categories = ""
     else:
-        categories = categories[0]
-        categories = "".join(categories.itertext())
+        if not categories:
+            categories = ""
+        else:
+            categories = categories[0]
+            categories = "".join(categories.itertext())
 
     return [twitter, cbrank, funding, site, categories]
 
