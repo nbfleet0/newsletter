@@ -13,6 +13,10 @@ buzz = open("buzz.txt", "r")
 string_buzz = buzz.read().replace('\n', '</br>')
 buzz.close()
 
+fintech_buzz = open("fintech_buzz.txt", "r")
+string_fintech_buzz = fintech_buzz.read().replace('\n', '</br>')
+fintech_buzz.close()
+
 message = """From: Arbor Ventures <arborventuresdata@gmail.com>
 To: Adam Barr-Neuwirth <adambarrneuwirth@gmail.com>
 MIME-Version: 1.0
@@ -21,7 +25,7 @@ Subject: Arbor Ventures Data Digest
 
 <html style="background-color:#ecf0f1; font-family: Helvetica, Arial, sans-serif; a{color:#006699;}">
 <center><img src="http://www.arborventures.com/images/common/arbor-ventures.svg" height="100" alt="logo"/></center></br></br>
-""" + string_stories + string_buzz
+""" + string_stories + string_buzz + string_fintech_buzz
 
 server = smtplib.SMTP('smtp.gmail.com:587')
 server.ehlo()

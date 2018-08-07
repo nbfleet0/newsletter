@@ -44,7 +44,7 @@ for message in messages:
 		if(reminder_obj[0] == "me"):
 			reminder_for = sender
 		elif(reminder_obj[0] == "all"):
-			reminder_for = "all@arborventures.com"
+			reminder_for = "team@arborventures.com"
 		else:
 			reminder_for = reminder_obj[0]
 

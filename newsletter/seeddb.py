@@ -12,7 +12,7 @@ import datetime
 
 # print(score.calculateScore(['https://angel.co/rapportive', 'http://www.crunchbase.com/organization/rapportive', 'Exited', 'Rapportive', 'http://rapportive.com', '6/2010', '$15,000,000', 'H', '$1,000,000']))
 
-def getBuzzyCompanies(number, a_id, date):
+def getBuzzyCompanies(number, a_id, date, ilvl):
 	hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
 	   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 	   'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
@@ -21,6 +21,7 @@ def getBuzzyCompanies(number, a_id, date):
 	   'Connection': 'keep-alive'}
 
 	obj = {}
+	fintech_obj = {}
 	all_scores = []
 	for accelerator in a_id:
 
@@ -73,7 +74,7 @@ def getBuzzyCompanies(number, a_id, date):
 			if(skip == False):
 				if(return_object[2] == "" and return_object[4] != "None" and return_object[1] != ""): 
 					pass_object = [return_object[1], return_object[4], return_object[8], return_object[3]] #[cb url, url, funding, name]
-					reutrn_val = score.calculateScore(pass_object) 
+					reutrn_val = score.calculateScore(pass_object)
 
 					print(reutrn_val)
 
@@ -82,6 +83,10 @@ def getBuzzyCompanies(number, a_id, date):
 						all_scores.append(string)
 
 						obj[return_object[3]] = int(reutrn_val[0])
+
+						interestLvl = reutrn_val[8] 
+						if(interestLvl > ilvl):
+							fintech_obj[return_object[3]] = int(reutrn_val[0])
 
 						file = open("list.csv", "a+")
 						file.write(string + ",")
@@ -99,6 +104,7 @@ def getBuzzyCompanies(number, a_id, date):
 def assembleTop(number, obj):
 	top_scores = sorted(obj, key=obj.get, reverse=True)[:number]
 
+	fintech_top_scores = sorted(obj, key=fintech_obj.get, reverse=True)[:number]
 
 	file = open("buzz.txt", "a+")
 	i = 0
@@ -107,4 +113,10 @@ def assembleTop(number, obj):
 		i+=1
 	file.close() #clear file
 
-	print(top_scores)
+	file = open("fintech_buzz.txt", "a+")
+	i = 0
+	for element in fintech_top_scores:
+		file.write("<tr><td align='center'><h3>"+element+" - "+str(fintech_obj[element])+"</h3></td></tr>")
+		i+=1
+	file.close() #clear file
+

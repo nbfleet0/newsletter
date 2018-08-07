@@ -106,8 +106,14 @@ def infoFromCrunchbase(url):
     print("Site")
     print(site)
 
+    categories = root.xpath('//*[@id="section-overview"]/mat-card/div[2]/div/fields-card[1]/div/div/span[2]/field-formatter/identifier-multi-formatter/span')
+    if not site:
+        categories = ""
+    else:
+        categories = categories[0]
+        categories = "".join(categories.itertext())
 
-    return [twitter, cbrank, funding, site]
+    return [twitter, cbrank, funding, site, categories]
 
 
     

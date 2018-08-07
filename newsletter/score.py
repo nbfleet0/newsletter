@@ -13,6 +13,9 @@ def calculateScore(object):
 	followers = scraper_functions.numberOfTwitterFollowers(cb_object[0])
 	cbrank = cb_object[1]
 	funding = cb_object[2] #going off cb
+	categories = cb_object[4]
+	interesting_words = helper.checkInterestLvl(categories)
+
 	if(funding == ""):
 		funding = object[2] #fallback
 	webresults = scraper_functions.numberOfWebResults(object[1])
@@ -63,8 +66,9 @@ def calculateScore(object):
 	total_score = (static_constant+dynamic_constant)/500 #500000 0-1, 50000 0-10, 5000 0-100
 
 	print(total_score)
+	interestLvl = len(interesting_words)
 
-	all_web = [total_score, int(followers), int(webresults), int(rank), int(inbound_links), bounce_rate, rank_increase, search_increase]
+	all_web = [total_score, int(followers), int(webresults), int(rank), int(inbound_links), bounce_rate, rank_increase, search_increase, interestLvl]
 
 
 	return all_web
