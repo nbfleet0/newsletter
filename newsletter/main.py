@@ -12,10 +12,10 @@ if __name__ == '__main__':
 	f.close()
 	time.sleep(1)
 
-	fortune.getStories(1)
-	techcrunch.getStories(1)
-	vcnewsdaily.getStories(1)
-	pehub.getStories(1)
+	fortune.getStories(2)
+	techcrunch.getStories(2)
+	vcnewsdaily.getStories(2)
+	pehub.getStories(2)
 
 	f = open('stories.txt', 'a')
 	f.write('</table></center>')
@@ -30,7 +30,7 @@ if __name__ == '__main__':
 	f.close()
 	time.sleep(1)
 
-	seeddb.getBuzzyCompanies(10, [2001, 3012, 1011], 2018) #number of top companies, array of acclerator id's from seed-db.com, earliest year we're interested in
+	seeddb.getBuzzyCompanies(10, [2001, 1011], 2018) #number of top companies, array of acclerator id's from seed-db.com, earliest year we're interested in
 
 	f = open('buzz.txt', 'a')
 	f.write('</table></center>')

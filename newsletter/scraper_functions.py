@@ -193,6 +193,7 @@ def getAlexaRankings(website):
 
 
 def numberOfWebResults(website):
+    # return 0 #uncomment if google is returning errors
     website = website.replace('https://', '').replace('http://', '').replace('www.', '').replace('/', '')
     url = "https://www.google.com/search?q=%22" + website + "%22&hl=en"
     page = requests.get(url)
