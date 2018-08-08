@@ -86,7 +86,7 @@ def infoFromCrunchbase(url):
     pos = contents.find("/search/organization.companies/field/organizations/rank_org_company/")
     end = contents.find('"',pos+68) #70 characters in '"/search/organization.companies/field/organizations/rank_org_company/"'
     cbrank = contents[pos+68:end]
-    # print(cbrank)
+    print(cbrank)
             
     pre_pos = contents.find("/search/funding_rounds/field/organizations/funding_total/")
     pos = contents.find('">', pre_pos)
@@ -317,3 +317,5 @@ def extractName(story_object): #accepts [headline, body]
                 print(string)
                 return string
                 break
+
+print(infoFromCrunchbase("https://www.crunchbase.com/organization/skillshare"))
