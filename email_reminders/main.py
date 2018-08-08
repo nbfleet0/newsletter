@@ -7,6 +7,7 @@ import quopri
 import uuid
 from subprocess import call
 import os
+import re
 
 # need to run command 'sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.atrun.plist' before this can work
 
@@ -39,13 +40,15 @@ for message in messages:
 		body = message.get_payload()
 	
 	body = quopri.decodestring(str(body))
-	body = body.split("\n\n")[1]
+	# body = body.split("\n\n")[1]
+	print(body)
 
 	reminder_obj = reminder_functions.parseReminder(body)
 	
 	if not reminder_obj:
 		print("no reminder")
 	else:
+		body = "Remind" + re.split("remind", body, flags=re.IGNORECASE)[1]
 		# Add in name -> email conversion later
 		print("FOR:")
 		for i, recipient in enumerate(reminder_obj[0]):
@@ -98,11 +101,11 @@ for message in messages:
 		attime = rundate.strftime("%H:%M %B %d %Y")
 		print(attime)
 
-		print('echo "python remind.py ' + uid + '"')
+		print('echo "python remind.py ' + uid + '" | at ' + attime)
 
-		os.system('echo "python remind.py ' + uid + '"')
+		os.system('echo "python remind.py ' + uid + '" | at ' + attime)
 
 
 
     # if()
-pop_conn.quit()
+# pop_conn.quit()

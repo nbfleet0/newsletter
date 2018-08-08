@@ -47,11 +47,12 @@ def checkQuantity(body, array):
 
 
 def parseReminder(body):
-	body = body.split("Content-Type")
-	if(len(body) > 1):
-		body = body[1]
-	else:
-		body = body[0]
+	# body = body.split("Content-Type")
+	# if(len(body) > 1):
+	# 	body = body[1]
+	# else:
+	# 	body = body[0]
+		
 	subject = body.lower().split("remind ")
 	if len(subject) < 2:
 		return []
