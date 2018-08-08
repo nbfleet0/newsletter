@@ -54,7 +54,7 @@ for message in messages:
 		for i, recipient in enumerate(reminder_obj[0]):
 			if recipient == "me":
 				reminder_obj[0][i] = sender
-			elif(reminder_obj[0][0] == "all"):
+			elif(reminder_obj[0][0] == "all" or reminder_obj[0][0] == "everyone"):
 				eminder_obj[0][i] = "all@arborventures.com"
 
 		time = reminder_obj[1]
@@ -108,4 +108,4 @@ for message in messages:
 
 
     # if()
-# pop_conn.quit()
+pop_conn.quit()

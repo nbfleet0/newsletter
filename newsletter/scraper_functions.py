@@ -20,7 +20,11 @@ def infoFromAngel(url):
         print("error")
         print e.fp.read()
 
-    contents = page.read()
+    try:
+        contents = page.read()
+    except (http.client.IncompleteRead) as e:
+        contents = e.partial
+
     root = html.fromstring(contents)
 
     location = root.xpath('//*[@id="root"]/div[4]/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div/div/div[1]/span/span/a[1]')[0]
@@ -86,6 +90,7 @@ def infoFromCrunchbase(url):
     pos = contents.find("/search/organization.companies/field/organizations/rank_org_company/")
     end = contents.find('"',pos+68) #70 characters in '"/search/organization.companies/field/organizations/rank_org_company/"'
     cbrank = contents[pos+68:end]
+    print("rank")
     print(cbrank)
             
     pre_pos = contents.find("/search/funding_rounds/field/organizations/funding_total/")
@@ -100,6 +105,10 @@ def infoFromCrunchbase(url):
         site = root.xpath('//*[@id="section-overview"]/mat-card/div[2]/div/fields-card[2]/div/div/span[2]/field-formatter/link-formatter/a')
     if not site:
         site = root.xpath('//*[@id="section-overview"]/mat-card/div[2]/div/fields-card[4]/div/div/span[2]/field-formatter/link-formatter/a')
+    if not site:
+        print("no site")
+        site = ""
+        return 0
     site = site[0]
     site = "".join(site.itertext())
     site = site.replace(" ", "")
@@ -318,4 +327,3 @@ def extractName(story_object): #accepts [headline, body]
                 return string
                 break
 
-print(infoFromCrunchbase("https://www.crunchbase.com/organization/skillshare"))

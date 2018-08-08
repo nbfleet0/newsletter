@@ -34,7 +34,7 @@ if __name__ == '__main__':
 	f.close()
 	time.sleep(1)
 
-	seeddb.getBuzzyCompanies(10, [2006], 2012, 1) #number of top companies, array of acclerator id's from seed-db.com, earliest year we're interested in, interest level threshold
+	seeddb.getBuzzyCompanies(10, [1011], 2012, 1) #number of top companies, array of acclerator id's from seed-db.com, earliest year we're interested in, interest level threshold
 
 	f = open('buzz.txt', 'a')
 	f.write('</table>')

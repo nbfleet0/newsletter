@@ -9,6 +9,8 @@ def calculateScore(object):
 		cb_object = object[4]
 	else:
 		cb_object = scraper_functions.infoFromCrunchbase(object[0]) 
+		if(cb_object == 0):
+			return [0, 0, 0, 0, 0, 0, 0, 0]
 
 	followers = scraper_functions.numberOfTwitterFollowers(cb_object[0])
 	cbrank = cb_object[1]
