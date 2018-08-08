@@ -97,7 +97,7 @@ for message in messages:
 		print(str(rundate))
 		attime = rundate.strftime("%H:%M %B %d %Y")
 		print(attime)
-		
+
 		print('echo "python remind.py ' + uid + '"')
 
 		# os.system('echo "python remind.py ' + uid + '"')
@@ -105,4 +105,4 @@ for message in messages:
 
 
     # if()
-# pop_conn.quit()
+pop_conn.quit()
