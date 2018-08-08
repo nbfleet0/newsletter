@@ -100,7 +100,7 @@ for message in messages:
 
 		print('echo "python remind.py ' + uid + '"')
 
-		# os.system('echo "python remind.py ' + uid + '"')
+		os.system('echo "python remind.py ' + uid + '"')
 
 
 
