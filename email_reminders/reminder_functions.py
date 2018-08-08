@@ -1,6 +1,8 @@
 import re
 
-def checkQuantity(body, array):
+# this file contains functions that help main.py parse out when and who we're supposed to remind
+
+def checkQuantity(body, array): #this function determines when to send the reminder
 
 	quantity_start = re.search("\d", body)
 	if(quantity_start):
@@ -46,13 +48,14 @@ def checkQuantity(body, array):
 		return checkQuantity(more, array)
 
 
-def parseReminder(body):
+def parseReminder(body): #this function determines who the reminder is for as well as calls the above function
+
 	# body = body.split("Content-Type")
 	# if(len(body) > 1):
 	# 	body = body[1]
 	# else:
 	# 	body = body[0]
-		
+
 	subject = body.lower().split("remind ")
 	if len(subject) < 2:
 		return []
@@ -61,9 +64,9 @@ def parseReminder(body):
 	if(len(subject) == 1):
 		number_pos = re.search("\d", subject[0]).start()
 		subject = subject[0][:int(number_pos)]
-		subject = re.split('and |, ',subject)
+		subject = re.split('and |, ',subject) #subjects can be separated by "and" or a comma
 		for i, s in enumerate(subject):
-			subject[i] = s.replace(" ", "")
+			subject[i] = s.replace(" ", "") #cleans up
 	else:
 		subject = subject[0]
 		subject = re.split('and |, ',subject)
@@ -73,6 +76,6 @@ def parseReminder(body):
 
 	body = body.split(subject[-1])[1].split("\n")[0]
 
-	obj = checkQuantity(body, {"years":0,"months":0,"weeks":0,"days":0,"hours":0,})
+	obj = checkQuantity(body, {"years":0,"months":0,"weeks":0,"days":0,"hours":0})
 
 	return [subject, obj]

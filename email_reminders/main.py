@@ -9,6 +9,8 @@ from subprocess import call
 import os
 import re
 
+#this file retrieves new messages from arborventuresdata@gmail.com. It determines if they have a "remind" clause, and if they do, it saves the message in messages.xml
+
 # need to run command 'sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.atrun.plist' before this can work
 
 pop_conn = poplib.POP3_SSL('pop.gmail.com')

@@ -2,6 +2,7 @@ import smtplib
 from email.mime.text import MIMEText
 import sys
 
+#this file is triggered automatically by linux's 'at' command. this parses the saved email and sends it to the recipient
 
 uid = sys.argv[1]
 
