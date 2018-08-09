@@ -67,8 +67,8 @@ def extractName(story_object): #accepts [headline, body]
         return string
 
     else:
-        trailing_verbs = ["Scores", "Pulls", "Raises", "Announces", "Completes", "Lands", "Snags", "Procures", "Nabs", "Bags", "Closes", 
-        "Attracts", "Gathers", "Inks", "Picks", "Rakes", "Takes", "Racks", "scores", "pulls", "raises", "announces", "completes", "lands", "snags", "procures", "nabs", "bags", "closes", 
+        trailing_verbs = ["Receives", "Scores", "Pulls", "Raises", "Announces", "Completes", "Lands", "Snags", "Procures", "Nabs", "Bags", "Closes", 
+        "Attracts", "Gathers", "Inks", "Picks", "Rakes", "Takes", "Racks", "receives", "scores", "pulls", "raises", "announces", "completes", "lands", "snags", "procures", "nabs", "bags", "closes", 
         "attracts", "gathers", "inks", "picks", "rakes", "takes", "racks"]
 
         string = []
