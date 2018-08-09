@@ -3,7 +3,6 @@ Scripts to find recent venture deals and send them out in emails. Scripts to sco
 </br></br>
 `-main.py`: Runs all nessesary scripts to scrape and save data. The "Buzzy List" feature is commented out since it makes so many requets we get blocked. `send.py` must be run manually after it is finished to send the email when needed.
 </br>
-
 <h3>Sources:</h3>
 The following files scrape RSS feeds from various sources and store the headline, link, and short paragrph of each in `stories.txt`</br></br>
 `-fortune.py`: "http://fortune.com/newsletter/termsheet" (new stories every day, not nessesarily unique)</br>
