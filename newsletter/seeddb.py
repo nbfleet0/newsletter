@@ -88,7 +88,7 @@ def getBuzzyCompanies(number, a_id, date, ilvl):
 						if(interestLvl > ilvl):
 							fintech_obj[return_object[3]] = int(reutrn_val[0])
 
-						file = open("list.csv", "a+")
+						file = open("./data/list.csv", "a+")
 						file.write(string + ",")
 						file.close()
 					
@@ -106,14 +106,14 @@ def assembleTop(number, obj, fintech_obj):
 
 	fintech_top_scores = sorted(fintech_obj, key=fintech_obj.get, reverse=True)[:number]
 
-	file = open("buzz.txt", "a+")
+	file = open("./data/buzz.txt", "a+")
 	i = 0
 	for element in top_scores:
 		file.write("<tr><td align='center'><h3>"+element+" - "+str(obj[element])+"</h3></td></tr>")
 		i+=1
 	file.close() #clear file
 
-	file = open("fintech_buzz.txt", "a+")
+	file = open("./data/fintech_buzz.txt", "a+")
 	i = 0
 	for element in fintech_top_scores:
 		file.write("<tr><td align='center'><h3>"+element+" - "+str(fintech_obj[element])+"</h3></td></tr>")

@@ -2,15 +2,15 @@ def checkInterestLvl(article_text):
     interest_lvl = 0
     word_array = []
 
-    text_file = open("vclist.txt", "r")
+    text_file = open("./data/vclist.txt", "r")
     vc_list = text_file.read().split(',')
     text_file.close()
     # geographies
-    text_file = open("geographies.txt", "r")
+    text_file = open("./data/geographies.txt", "r")
     geo_list = text_file.read().split(',')
     text_file.close()
     # keywords
-    text_file = open("keywords.txt", "r")
+    text_file = open("./data/keywords.txt", "r")
     keyword_list = text_file.read().split(',')
     text_file.close()
 

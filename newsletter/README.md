@@ -1,8 +1,18 @@
 # /newsletter
-Scripts to find recent venture deals and send them out in emails. Scripts to score comapnies, and scrape early stage ones from seed-db.com
+Scripts to find recent venture deals and send them out in emails. Scripts to score comapnies, and scrape early stage ones from seed-db.com. <bold> Currently only runs on Python 2.7 </bold>. You should use a web browser for best user experience for now. 
+
+<h3>How to Run:</h3>
+You can either manually execute ./run.sh while in the directory or set up crontab to do it regularly. </br>
+Here are some helpful steps to setup crontab </br>
+1) $ chmod +x run.sh  (this gives the permission to execute the bash script) </br>
+2) $ crontab -e (for convenience, if you have editor like Nano, you can specify the editor by calling $ env EDITOR=nano crontab -e) </br>
+3) 0 9 * * 1 path to bash script (this means to execute the script every Monday at 9am, see https://ole.michelsen.dk/blog/schedule-jobs-with-crontab-on-mac-osx.html for more information) </br>
+
 </br></br>
-`-main.py`: Runs all nessesary scripts to scrape and save data. The "Buzzy List" feature is commented out since it makes so many requets we get blocked. `send.py` must be run manually after it is finished to send the email when needed.
+`-scrape.py`: Runs all nessesary scripts to scrape and save data. The "Buzzy List" feature is currently commented out since it makes so many requets we are getting blocked. </br>
+`-send.py`: sends content in `stories.txt` by email. The "to" email needs to be replaced with whoever the emails should be sent to.
 </br>
+
 <h3>Sources:</h3>
 The following files scrape RSS feeds from various sources and store the headline, link, and short paragrph of each in `stories.txt`</br></br>
 `-fortune.py`: "http://fortune.com/newsletter/termsheet" (new stories every day, not nessesarily unique)</br>
@@ -25,9 +35,8 @@ The following files scrape RSS feeds from various sources and store the headline
 `-stories.txt`: stores new stories as their scraped by sources</br>
 `-keywords.txt`: stores keywords we're interested in</br>
 `-vclist.txt`: stores vc's we're interested in</br>
-`-geographies.txt`: stores locations we're interested in
+`-geographies.txt`: stores locations we're interested in </br>
 `list.csv`: Primarily for debugging, buzz scores for each company are saved here as they are calculated
 </br></br>
 
-<h3>Email</h3>
-`-send.py`: sends content in `stories.txt` by email. The "to" email needs to be replaced with whoever the emails should be sent to.</br>
+</br>

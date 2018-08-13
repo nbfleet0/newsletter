@@ -35,25 +35,27 @@ def getStories(lvl):
         # check interest
         interest_array = helper.checkInterestLvl(article_text)
         interest_lvl = len(interest_array)
-        print(interest_array)
+        #print(interest_array)
 
         if (interest_lvl > lvl): #more than 2 interesting aspects of an article
-            print("Adding article")
+            #print("Adding article")
 
             article_text = article_text.split("<br/><br/>")[0]
-            print(article_text)
+            #print(article_text)
 
-            print(interest_array)
+            #print(interest_array)
 
-            buzz_score = score.getBuzzScore([title, article_text])
+            #buzz_score = score.getBuzzScore([title, article_text])
 
             for word in interest_array:
                 plural = word + "s"
                 article_text = article_text.replace(plural, "<b>" + plural + "</b>").replace(word, "<b>" + word + "</b>").replace(word.capitalize(), "<b>" + word.capitalize() + "</b>")
 
 
-            string = "<tr><td><h2 style='display:inline;'><a href='" + link + "' style='color:#006699;'>" + title + "</a> (Buzz Score: " + str(int(buzz_score)) + ")</h2></br><i style='color:#7f8c8d'>" + ", ".join(interest_array) + "</i></br></br>" + article_text + "</td></tr>"
-            save_file = open("stories.txt", 'a+')
+            string = "<tr><td><h2 style='display:inline;'><a href='" + link + "' style='color:#006699;'>" + title \
+            + " </h2></br><i style='color:#7f8c8d'>" + ", ".join(interest_array) + "</i></br></br>" + "<p><i style='color:#000000'>" \
+            + article_text + "</p></td></tr>"
+            save_file = open("./data/stories.txt", 'a+')
             save_file.write(string)
             save_file.close()
 
