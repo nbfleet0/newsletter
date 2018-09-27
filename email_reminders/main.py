@@ -8,11 +8,13 @@ import uuid
 from subprocess import call
 import os
 import re
+# from crontab import CronTab
 
 #this file retrieves new messages from arborventuresdata@gmail.com. It determines if they have a "remind" clause, and if they do, it saves the message in messages.xml
 
-# need to run command 'sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.atrun.plist' before this can work
+# need to run command 'sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.atrun.plist' before this can work 
 
+# cron = CronTab()
 pop_conn = poplib.POP3_SSL('pop.gmail.com')
 pop_conn.user('arborventuresdata')
 pop_conn.pass_('8arbor88')
@@ -43,8 +45,10 @@ for message in messages:
 	
 	body = quopri.decodestring(str(body))
 	# body = body.split("\n\n")[1]
+	print ('Body!')
 	print(body)
 
+	#Check whether the email contains "Remind"
 	reminder_obj = reminder_functions.parseReminder(body)
 	
 	if not reminder_obj:
@@ -57,7 +61,7 @@ for message in messages:
 			if recipient == "me":
 				reminder_obj[0][i] = sender
 			elif(reminder_obj[0][0] == "all" or reminder_obj[0][0] == "everyone"):
-				eminder_obj[0][i] = "all@arborventures.com"
+				eminder_obj[0][i] = "team@arborventures.com" #this is only possible if we have arborventures account
 
 		time = reminder_obj[1]
 
@@ -86,7 +90,8 @@ for message in messages:
 		email_message = [reminder_obj[0], subject, body] #[recipients, subject, message content]
 		print(email_message)
 
-		uid = str(uuid.uuid4())
+		# writing the message to the file
+		uid = str(uuid.uuid4()) #unique id for a message
 		file = open("messages.xml", "a+")
 		file.write("<message id='" + uid + "'>")
 		file.write("<to>")
@@ -102,6 +107,10 @@ for message in messages:
 		print(str(rundate))
 		attime = rundate.strftime("%H:%M %B %d %Y")
 		print(attime)
+		# job = cron.new(attime + "python2.7 reminder.py")
+		# cron.write()
+		# need bash statement to access crontab
+
 
 		print('echo "python remind.py ' + uid + '" | at ' + attime)
 
@@ -111,3 +120,4 @@ for message in messages:
 
     # if()
 pop_conn.quit()
+#print ('hello world')

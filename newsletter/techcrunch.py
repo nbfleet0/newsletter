@@ -8,7 +8,7 @@ import helper_functions as helper
 import score
 
 
-def getStories(lvl):
+def getStories(lvl, title_set):
 
     contents = urlopen("https://feeds.feedburner.com/TechCrunch/fundings-exits").read()
     root = et.fromstring(contents)
@@ -27,12 +27,13 @@ def getStories(lvl):
         interest_array = helper.checkInterestLvl(article_text)
         interest_lvl = len(interest_array)
         #print(interest_array)
-
-        if (interest_lvl > lvl): #more than 2 interesting aspects of an article
+        company_name = title.split(" ")[0]
+        if interest_lvl > lvl and company_name not in title_set: #more than 2 interesting aspects of an article
             #print("Adding article")
 
             article_text = article_text.split("<br/><br/>")[0]
             #print(article_text)
+            title_set.add(company_name)
 
             #buzz_score = score.getBuzzScore([title, article_text])
 

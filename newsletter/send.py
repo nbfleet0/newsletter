@@ -3,12 +3,17 @@ from smtplib import SMTPException
 
 
 me = "arborventuresdata@gmail.com"
-you = "spark@arborventures.com"
+you = ["spark@arborventures.com", "arsenaliverpool@gmail.com"]
 
 #Send news stories
 stories = open("./data/stories.txt", "r")
 string_stories = stories.read().replace('\n', '</br>')
 stories.close()
+
+#empty stories
+f = open('./data/stories.txt', 'w')
+f.write('<center><table width="80%" style="border: 1px solid black; background-color:#ffffff" cellpadding="16"></table></center>')
+open('./data/story_companies.csv', 'w').close() #empty companies
 
 #Send top buzz startups
 
@@ -23,7 +28,7 @@ stories.close()
 #fintech_buzz.close()
 
 message = """From: Arbor Ventures <arborventuresdata@gmail.com>
-To: Sang Ha Park <spark@arborventures.com>
+To: Junior Team <junior@arborventures.com>
 MIME-Version: 1.0
 Content-type: text/html; charset=us-ascii
 Subject: Arbor Ventures Data Digest

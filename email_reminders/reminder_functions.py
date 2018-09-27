@@ -56,8 +56,9 @@ def parseReminder(body): #this function determines who the reminder is for as we
 	# else:
 	# 	body = body[0]
 
+	# why just not use subject from main?
 	subject = body.lower().split("remind ")
-	if len(subject) < 2:
+	if len(subject) < 2: # No sender specified
 		return []
 
 	subject = subject[1].split("in")
@@ -73,9 +74,9 @@ def parseReminder(body): #this function determines who the reminder is for as we
 		for i, s in enumerate(subject):
 			subject[i] = s.replace(" ", "")
 	
-
+	#body = body.split("\n")[0]
 	body = body.split(subject[-1])[1].split("\n")[0]
 
 	obj = checkQuantity(body, {"years":0,"months":0,"weeks":0,"days":0,"hours":0})
 
-	return [subject, obj]
+	return [body, obj]

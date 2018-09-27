@@ -4,26 +4,23 @@ import vcnewsdaily
 import pehub
 import seeddb
 import time
+import csv
 
 
 def scrape():
-	f = open('./data/stories.txt', 'w')
-	f.write('<center><table width="80%" style="border: 1px solid black; background-color:#ffffff" cellpadding="16">')
-	f.close()
-	time.sleep(1)
-
 	#parameter in the function signifies the threshold of interest level, i.e. the number of keywords in each story
 	#it's currently set as 2
 
-	fortune.getStories(2) 
-	techcrunch.getStories(2)
-	vcnewsdaily.getStories(2)
-	pehub.getStories(2)
+	titles = set()
 
-	f = open('./data/stories.txt', 'a')
-	f.write('</table></center>')
-	f.close()
-
+	with open('./data/story_companies.csv', 'r') as csvfile:
+		csvreader = csv.reader(csvfile)
+		for row in csvreader:
+			titles.add(row[0])
+	
+	titles = fortune.getStories(2, titles) 
+	print (titles) #comapny list
+	
 	##################################################################################
 	##### NEED TO BE CHANGED ACCORDINGLY TO CRUNCHBASE VENTURE PARTNERS PROGRAM ######
 	##################################################################################

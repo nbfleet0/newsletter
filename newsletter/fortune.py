@@ -6,7 +6,7 @@ import datetime
 import score
 import time
 
-def getStories(lvl):
+def getStories(lvl, title_set):
     page = requests.get("http://fortune.com/newsletter/termsheet/?scrape=1")
     root = html.fromstring(page.text)
     tree = root.getroottree()
@@ -14,6 +14,7 @@ def getStories(lvl):
     xpath = '/html/body/custom/table[1]/tr[2]/td/table/tr[10]/td/table/tr/td/table/tr[1]/td/p['
     i = 0
     linkcheck = root.xpath(xpath + str(i) + ']')
+
     while not linkcheck:
         i += 1
         #print(i)
@@ -54,16 +55,19 @@ def getStories(lvl):
                 #print(article_text)
 
                 title = article_text.split(",")[0] #company name
-
+                if title not in title_set:
+                    title_set.add(title)       
                 #buzz_score = score.getBuzzScore([title, article_text])
+                    for word in interest_array:
+                        bold = "<b>" + word + "</b>"
+                        article_text = article_text.replace(word, bold).replace(word.capitalize(), "<b>" + word.capitalize() + "</b>")
 
-                for word in interest_array:
-                    bold = "<b>" + word + "</b>"
-                    article_text = article_text.replace(word, bold).replace(word.capitalize(), "<b>" + word.capitalize() + "</b>")
+                    string = "<tr><td><h2 style='display:inline;'><a href='" + link + "' style='color:#006699;'>" + title \
+                     + " </h2></br><i style='color:#7f8c8d'>" + ", ".join(interest_array) + "</i></br></br>" + "<p><i style='color:#000000'>" \
+                     + article_text + "</p></td></tr>"
+                    save_file = open("./data/stories.txt", 'a+')
+                    save_file.write(string.encode('utf-8'))
+                    save_file.close()
+    return title_set
 
-                string = "<tr><td><h2 style='display:inline;'><a href='" + link + "' style='color:#006699;'>" + title \
-                 + " </h2></br><i style='color:#7f8c8d'>" + ", ".join(interest_array) + "</i></br></br>" + "<p><i style='color:#000000'>" \
-                 + article_text + "</p></td></tr>"
-                save_file = open("./data/stories.txt", 'a+')
-                save_file.write(string.encode('utf-8'))
-                save_file.close()
+                
